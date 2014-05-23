@@ -36,33 +36,16 @@ class CStringUtilTest : public CPPUNIT_NS::TestFixture
 {
     CPPUNIT_TEST_SUITE (CStringUtilTest);
     CPPUNIT_TEST (itoaTest);
-    //CPPUNIT_TEST (assignmentTest);
-    //CPPUNIT_TEST (inequalityOperator);
-    //CPPUNIT_TEST (append);
-    //CPPUNIT_TEST (reverse);
-    //CPPUNIT_TEST (operatorAdd);
     CPPUNIT_TEST_SUITE_END ();
 
 
 public:
-   CStringUtilTest();
-   virtual ~CStringUtilTest();
 
    void setUp();
    void tearDown();
 
 private:
-	
-	int numFailures = 0;
-
    void itoaTest();
-   void assignmentTest();
-   void constructorTest();
-   void equalityOperator();
-   void inequalityOperator();
-   void operatorAdd();
-   void reverse();
-
 
 };
 
