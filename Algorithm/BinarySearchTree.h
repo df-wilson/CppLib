@@ -1,8 +1,8 @@
 /**
-* @class   BinarySearchTree
+* @class   BTree
 * @brief   Implements a binary search tree.
 * @author  Dean Wilson
-* @version 1.1
+* @version 1.0
 * @date    January 27, 2014
 *
 * Library  UTIL
@@ -17,8 +17,8 @@
 * Note: This class is not thread safe.
 */
 
-#ifndef BINARY_SEARCH_TREE_H
-#define BINARY_SEARCH_TREE_H
+#ifndef BTREE_H
+#define BTREE_H
 
 #include <iostream>
 #include <memory>
@@ -29,7 +29,7 @@ using std::make_shared;
 namespace dw {
 
 template <typename T>
-class BinarySearchTree
+class BTree
 {
 public:
 
@@ -59,6 +59,7 @@ public:
 	}
 
 	void empty() {
+		std::cout << "DEAN: In empty" << std::endl;
 		empty(mRoot, nullptr);
 	}
 
@@ -198,6 +199,7 @@ private:
 
 	void empty(shared_ptr<Node> node, shared_ptr<Node>parent)
 	{
+		std::cout << "In empty: Data is " << node->data << std::endl;
 		if(node->left) {
 			empty(node->left, node);
 		}
@@ -210,9 +212,11 @@ private:
 		// remove the root node and set mRoot to nullptr.
 		if(parent != nullptr) {
 			if(node->data < parent->data) {
+				std::cout << "In empty: " << "Deleting left " << std::endl;
 				parent->left = nullptr;
 			}
 			else {
+				std::cout << "In empty: Deleting right " << std::endl;
 				parent->right = nullptr;
 			}
 		}

@@ -1,5 +1,5 @@
-#ifndef STRINGSTUFF_H
-#define STRINGSTUFF_H
+#ifndef CSTRING_UTILS_H
+#define CSTRING_UTILS_H
 
 #include <memory>
 #include <string>
