@@ -21,7 +21,6 @@
 *.app
 
 #CMake files
-CMakeLists.txt
 CMakeCache.txt
 CMakeFiles
 Makefile
