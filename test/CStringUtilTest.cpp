@@ -31,13 +31,9 @@ void CStringUtilTest::tearDown()
 */
 void CStringUtilTest::itoaTest()
 {
-	int val1 = 123456;
-  int val2 = 0;
-  int val3 = -123456;
-
-  char val1Str[] = "123456";
-  char val2Str[] = "0";
-  char val3Str[] = "-123456";
+   int val1 = 123456;
+   int val2 = 0;
+   int val3 = -123456;
   
 	char *numStr = (char *)malloc(sizeof(char) * 50);
 	char *numStr2 = new char[50];
@@ -57,16 +53,27 @@ void CStringUtilTest::itoaTest()
 
 	ret = itoa(numStr, val3, 16);
 	std::cout << "Return is " << ret << " string (hex) is" << numStr << std::endl;
+  
+	free(numStr);
+	delete[] numStr2;
+}
 
-	ret = atoi(val1Str);
-	std::cout << " int val is " << ret << std::endl;
+void CStringUtilTest::atoiTest()
+{
+   char val1Str[] = "123456";
+   char val2Str[] = "0";
+   char val3Str[] = "-123456";
+   int val1 = 123456;
+   int val2 = 0;
+   int val3 = -123456;
+   int ret = 0;
+   
+   ret = atoi(val1Str);
+   REQUIRE(ret == val1);
 
 	ret = atoi(val2Str);
 	std::cout << " int val is " << ret << std::endl;
 
 	ret = atoi(val3Str);
-	std::cout << " int val is " << ret << std::endl;
-  
-	free(numStr);
-	delete[] numStr2;
+	std::cout << " int val is " << ret << std::endl;   
 }

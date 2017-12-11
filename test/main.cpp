@@ -1,23 +1,10 @@
-#include <iostream>
+// Let Catch provide main():
+#define CATCH_CONFIG_MAIN
 
-//#include "linkedlist.h"
-//#include "stringstuff.h"
-//#include "MyString.h"
+#include "catch.hpp"
 
-#include <cppunit/CompilerOutputter.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
-#include <cppunit/ui/text/TestRunner.h>
+TEST_CASE( "1: All test cases reside in other .cpp files (empty)", "[multi-file:1]" ) 
+{
 
-int main() {
-
-    CppUnit::TestFactoryRegistry &registry = CppUnit::TestFactoryRegistry::getRegistry();
-	 CppUnit::TextUi::TestRunner runner;
-    runner.addTest( registry.makeTest() );
-	 
-	// Change the default outputter to a compiler error format outputter
-	runner.setOutputter( new CppUnit::CompilerOutputter( &runner.result(),
-                                                       std::cerr ) );
-    bool wasSuccessful = runner.run();
-    //bool wasSuccessful = runner.run( "", false );
-    return wasSuccessful ? 0 : 100;
 }
+
