@@ -4,9 +4,12 @@
 #include <memory>
 #include <string>
 
+namespace dw {
+   
 // Error codes
 const int NULL_STR_INPUT_ERROR = -1;
 const int INVALID_RADIX_ERROR  = -2;
+const int UNKNOWN_ERROR        = 3;
 
 /**
  * @brief Convert a string to an integer value
@@ -29,26 +32,6 @@ int atoi(char* strIn);
  * @return 0 if successful or an error code otherwise.
  */
 int itoa(char* str, int number, int radix);
-
-/**
- * @brief Reverses a string.
- *
- * @param str [in/out] The string to be reversed
- * @return void
- */
-void reverse(char* str);
-
-std::string reverseWordOrder(const std::string& strIn);
-
-void reverseWordOrder(char* strIn);
-
-/**
- * @brief Returns the length of a string, not including the null terminator.
- *
- * @param strIn The string to find the length of.
- * @return The size of the string.
- */
-int strLen(const char* strIn);
 
 bool isCharOneOf(char charIn, const char* charsToMatch);
 
@@ -89,6 +72,40 @@ bool isPallindrome(int numIn);
 char* dstrtok( char* str, const char* delim );
 
 /**
+ * @brief Reverses a string.
+ *
+ * @param str [in/out] The string to be reversed
+ * @return void
+ */
+void reverse(char* str);
+
+std::string reverseWordOrder(const std::string& strIn);
+
+void reverseWordOrder(char* strIn);
+
+/**
+ * @brief Returns the length of a string, not including the null terminator.
+ *
+ * @param strIn The string to find the length of.
+ * @return The size of the string.
+ */
+int strlen (const char* strIn);
+
+
+/**
+* @brief Compare two strings up to a maximum length. Returns 0 if the two strings are the
+* same, 1 if string1 > string2, or -1 if string1 < string2
+* 
+* @param string1 first string to compare
+* @param string2 second string to compare
+* @param length  max number of characters to compare
+* @return int 
+*/
+int strncmp(const char*  string1,
+            const char*  string2,
+            unsigned int length);
+
+/**
  * @brief Convert an ascii string to all lowercase. Only characters A-Z are modified,
  * all others are ignored.
  *
@@ -121,5 +138,7 @@ char toLower(char value);
  * @return the converted character
  */
 char toUpper(char value);
+
+} // end namespace dw
 
 #endif
