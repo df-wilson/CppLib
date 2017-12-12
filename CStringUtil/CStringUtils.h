@@ -17,7 +17,7 @@ const int UNKNOWN_ERROR        = 3;
  * @param strIn The string to convert
  * @return The integer equivalent of the string
  */
-int atoi(char* strIn);
+int atoi(const char* strIn);
 
 /**
  * @brief Convert an integer to its string representation. The integer can be either
@@ -33,6 +33,11 @@ int atoi(char* strIn);
  */
 int itoa(char* str, int number, int radix);
 
+/**
+ * @brief Check if a character is in a group of characters.
+ * @param charIn [in]   the character to test
+ * @param charsToMatch  the group of characters to match against
+ */
 bool isCharOneOf(char charIn, const char* charsToMatch);
 
 /**

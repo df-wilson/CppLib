@@ -7,6 +7,14 @@ const char val2Str[] = "0";
 const char val3Str[] = "-123456";
 const char val4Str[] = "123";
 
+const char val1OctStr[] = "361100";
+const char val3HexStr[] = "-1E240";
+
+const int val1 = 123456;
+const int val2 = 0;
+const int val3 = -123456;
+
+
 TEST_CASE("Test strlen functionality", "[CStringUtil]")
 {
    int size = dw::strlen(val1Str);
@@ -40,52 +48,40 @@ TEST_CASE("Test strncmp functionality", "[CStringUtil]")
    result = dw::strncmp(val1Str, val4Str, dw::strlen(val4Str));
    REQUIRE(result == 0);
    
-      result = dw::strncmp(val1Str, val4Str, 0);
+   result = dw::strncmp(val1Str, val4Str, 0);
    REQUIRE(result == 0);
 }
 
 TEST_CASE("Test itoa functionality", "[CStringUtil]")
 {
-   int val1 = 123456;
-   int val2 = 0;
-   int val3 = -123456;
-
-   char val1Str[] = "123456";
-   char val2Str[] = "0";
-   char val3Str[] = "-123456";
-  
-   char *numStr = (char *)malloc(sizeof(char) * 50);
-   char *numStr2 = new char[50];
+   char *numStr = new char[50];
   
    int ret = dw::itoa(numStr, val2, 10);
    REQUIRE(ret == 0);
-   std::cout << "Return is " << ret << " string is " << numStr << std::endl;
+   REQUIRE(dw::strncmp(numStr, val2Str, dw::strlen(val2Str)) == 0);
+
 
    ret = dw::itoa(numStr, val1, 10);
-   std::cout << "Return is " << ret << " string is " << numStr << std::endl;
+   REQUIRE(ret == 0);
+   REQUIRE(dw::strncmp(numStr, val1Str, dw::strlen(val1Str)) == 0);
 
    ret = dw::itoa(numStr, val3, 10);
-   std::cout << "Return is " << ret << " string is " << numStr << std::endl;
+   REQUIRE(ret == 0);
+   REQUIRE(dw::strncmp(numStr, val3Str, dw::strlen(val3Str)) == 0);
 
    ret = dw::itoa(numStr, val1, 8);
-   std::cout << "Return is " << ret << " string (hex) is " << numStr
-             << std::endl;
+   REQUIRE(ret == 0);
+   REQUIRE(dw::strncmp(numStr, val1OctStr, dw::strlen(val1OctStr)) == 0);
 
    ret = dw::itoa(numStr, val3, 16);
-   std::cout << "Return is " << ret << " string (hex) is" << numStr << std::endl;
+   REQUIRE(ret == 0);
+   REQUIRE(dw::strncmp(numStr, val3HexStr, dw::strlen(val3HexStr)) == 0);
 
-   free(numStr);
-   delete[] numStr2;
+   delete[] numStr;
 }
 
-TEST_CASE("Test dw::atoi functionality", "[CStringUtil]")
+TEST_CASE("Test atoi functionality", "[CStringUtil]")
 {
-   char val1Str[] = "123456";
-   char val2Str[] = "0";
-   char val3Str[] = "-123456";
-   int val1 = 123456;
-   int val2 = 0;
-   int val3 = -123456;
    int ret = 0;
    
    ret = dw::atoi(val1Str);
@@ -97,3 +93,13 @@ TEST_CASE("Test dw::atoi functionality", "[CStringUtil]")
    ret = dw::atoi(val3Str);
    REQUIRE(ret == val3);
 }
+
+TEST_CASE("Test isCharOneOf functionality", "[CStringUtil]")
+{
+   REQUIRE(dw::isCharOneOf('a', val1Str) == false);
+   REQUIRE(dw::isCharOneOf('2', val1Str) == true);
+   REQUIRE(dw::isCharOneOf('-', val3HexStr) == true);
+   REQUIRE(dw::isCharOneOf('E', val3HexStr) == true);
+   REQUIRE(dw::isCharOneOf('e', val3HexStr) == false);
+}
+

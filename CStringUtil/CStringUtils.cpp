@@ -13,7 +13,7 @@ using std::string;
 namespace dw {
    
 //-----------------------------------------------------------------------------
-int atoi(char* strIn) {
+int atoi(const char* strIn) {
    int  stringLength = 0;
    bool isNegative   = false;
    char tempChar     = 0;
