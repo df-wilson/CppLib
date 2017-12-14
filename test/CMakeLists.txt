@@ -9,6 +9,7 @@ set(SOURCE_FILES
     03_QueueTest.cpp
     04_StackTest.cpp
     05_CStringUtilTest.cpp
+    07_Vector3Test.cpp
 )
 
 add_executable(tests ${SOURCE_FILES}) 

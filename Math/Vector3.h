@@ -20,7 +20,7 @@
 #include <iostream>
 
 /*---------  Program Includes  ----------------*/
-#include "MathUtil.h"
+#include "mathutil.h"
 
 /*---------  Class Definition  ----------------*/
 
