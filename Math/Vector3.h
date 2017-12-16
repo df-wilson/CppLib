@@ -1,19 +1,18 @@
-#ifndef VECTOR3_H
-#define VECTOR3_H
-
 /**
  * @class   Vector3
- * @brief   Math 3D vector implementation. Contains values x,y,z.
- * Can be used with ints, floats, etc, or classes that implement math operators
- * such as +, -, *, /, <, >, =.
- *
+ * @brief   A 3D vector.
  * @author  Dean Wilson
  * @version 1.0
  * @date    March 3, 2014
+ * Library  Math
  *
- * Library  MATH
- *
+ * Math 3D vector implementation. Contains values x,y,z.
+ * Can be used with ints, floats, etc, or classes that implement math operators
+ * such as +, -, *, /, <, >, =.
  */
+
+#ifndef VECTOR3_H
+#define VECTOR3_H
 
 /*---------  System Includes  -----------------*/
 #include <cmath>
@@ -62,14 +61,15 @@ public:
    void z(T z) { mZ = z; }
 
    /**
-    * @brief Sets the x, y and z values.
+    * Sets the x, y and z values.
     *
     * @param x The x value
     * @param y The x value
     * @param z The x value
     * @return void
     */
-   void set(T x, T y, T z) {
+   void set(T x, T y, T z) 
+   {
        mX = x;
        mY = y;
        mZ = z;
@@ -80,7 +80,8 @@ public:
     *
     * @return The length of the vector in the same units as the input parameters.
     */
-   T length() const {
+   T length() const 
+   {
       T length = sqrt((mX * mX) + (mY * mY) + (mZ * mZ));
       return length;
    }
@@ -91,7 +92,8 @@ public:
     *
     * @return A vector3 that is the negated version of this Vector3.
     */
-   Vector3<T> operator-() const {
+   Vector3<T> operator-() const 
+   {
        return Vector3(-mX, -mY, -mZ);
    }
 
@@ -113,10 +115,10 @@ private:
  * @param v1 The first vector
  * @param v2 The second vector
  * @return The dot product of the two vectors.
- *
  */
 template<typename T>
-T dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) {
+T dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) 
+{
     return v1.x() * v2.x() +
            v1.y() * v2.y() +
            v1.z() * v2.z();
@@ -129,10 +131,10 @@ T dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) {
  * @param v1 The first vector
  * @param v2 The second vector
  * @return The dot product of the two vectors.
- *
  */
 template<typename T>
-Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2) {
+Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2) 
+{
     T x = v1.x() + v2.x();
     T y = v1.y() + v2.y();
     T z = v1.z() + v2.z();
@@ -147,10 +149,10 @@ Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2) {
  * @param v1 The first vector
  * @param v2 The second vector
  * @return Another vector that contains the result of v1 - v2.
- *
  */
 template<typename T>
-Vector3<T> operator- (const Vector3<T>& v1, const Vector3<T> v2) {
+Vector3<T> operator- (const Vector3<T>& v1, const Vector3<T> v2) 
+{
     T x = v1.x() - v2.x();
     T y = v1.y() - v2.y();
     T z = v1.z() - v2.z();
@@ -176,8 +178,16 @@ std::ostream& operator<<(std::ostream&  streamOut,
     return streamOut;
 }
 
+/**
+* @brief Find the angle between two vectors in radians.
+* 
+* @param v1 The first vector.
+* @param v2 The second vector
+* @return float
+*/
 template <typename T>
-float angleBetweenVectorsRadians(const Vector3<int>& v1, const Vector3<int>& v2) {
+T angleBetweenVectorsRadians(const Vector3<T>& v1, const Vector3<T>& v2) 
+{
     float angleRadians = 0.0;
     float dotProductResult = dotProduct(v1, v2);
 

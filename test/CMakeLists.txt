@@ -14,4 +14,4 @@ set(SOURCE_FILES
 
 add_executable(tests ${SOURCE_FILES}) 
 
-TARGET_LINK_LIBRARIES(tests stringutils)
+TARGET_LINK_LIBRARIES(tests stringutils math)

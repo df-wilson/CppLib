@@ -1,4 +1,6 @@
 #include "catch.hpp"
+
+#include "../Math/mathutil.h"
 #include "../Math/Vector3.h"
 
 const int DEFAULT_INT = 0;
@@ -132,4 +134,30 @@ TEST_CASE("Test Vector3 subtract", "[vector]")
    REQUIRE(result.x() == TEST_INT_X - TEST_2_INT_X);
    REQUIRE(result.y() == TEST_INT_Y - TEST_2_INT_Y);
    REQUIRE(result.z() == TEST_INT_Z - TEST_2_INT_Z);
+}
+
+TEST_CASE("Test Vector3 dot product", "[vector]")
+{
+   dw::Vector3<double> vector1(-5.955, -4.904, -1.874);
+   dw::Vector3<double> vector2(-4.496, -8.755, 7.103);
+   double result = dw::dotProduct(vector1, vector2);
+   REQUIRE(result == Approx(56.397));
+
+   dw::Vector3<double> vector3(7.887, 4.138, 0.0);
+   dw::Vector3<double> vector4(-8.802, 6.776, 0.0);
+   result = dw::dotProduct(vector3, vector4);
+   REQUIRE(result == Approx(-41.382));
+}
+
+TEST_CASE("Test Vector3 angle betwee vectors", "[vector]")
+{
+   dw::Vector3<double> vector1(7.35, 0.221, 5.188);
+   dw::Vector3<double> vector2(2.751, 8.259, 3.985);
+   double angleRadians = dw::angleBetweenVectorsRadians(vector1, vector2);
+   REQUIRE(angleRadians == Approx(1.052));
+   
+   dw::Vector3<double> vector3(3.183, -7.627, 0.0);
+   dw::Vector3<double> vector4(-2.668, 5.319, 0.0);
+   angleRadians = dw::angleBetweenVectorsRadians(vector3, vector4);
+   REQUIRE(angleRadians == Approx(3.072));
 }
