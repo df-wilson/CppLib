@@ -37,5 +37,11 @@ isFloatAlmostEqual(float valOneIn, float valTwoIn, float tolerance)
    return isDoubleAlmostEqual(valOneIn, valTwoIn, tolerance);
 }
 
+double
+radiansToDegrees(double radians)
+{
+   return radians * 180.0 / dw::PI;
+}
+
 } // End namespace
 

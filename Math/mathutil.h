@@ -17,9 +17,11 @@
 
 namespace dw {
 
+const double PI = 3.141592653589793238;
+   
 /**
- * @brief Returns true for a value that is between 0.0 and the provided tolerance,
- * otherwise returns false. If tolerance is < 0.0 then false is returned.
+ * Compare two double values to detemine if the difference is within the specified
+ * tolerance.
  *
  * @param value The value to check to see if it is within zero and the tolerance value
  * @param tolerance The tolerance value. Must be >= zero. Ex. 0.001
@@ -35,7 +37,7 @@ isAlmostZero(double value, double tolerance);
  * @param valOneIn First value to compare
  * @param valTwoIn Second Value to compare
  * @param tolerance The allowable difference between the to values for them still to be considered equal
- * @return bool
+ * @return true if the value is almost zero, otherwise false.
  */
 bool
 isDoubleAlmostEqual(double valOneIn, double valTwoIn, double tolerance);
@@ -47,10 +49,28 @@ isDoubleAlmostEqual(double valOneIn, double valTwoIn, double tolerance);
  * @param valOneIn First value to compare
  * @param valTwoIn Second Value to compare
  * @param tolerance The allowable difference between the to values for them still to be considered equal
- * @return bool
+ * @return true if the value is almost zero, otherwise false.
  */
 bool
 isFloatAlmostEqual(float valOneIn, float valTwoIn, float tolerance);
+
+/**
+* Converts radians to degrees.
+* 
+* @param  radians the angle in radians
+* @return the value in degrees
+*/
+double
+radiansToDegrees(double radians);
+
+/**
+* Converts radians to degrees.
+* 
+* @param degrees the angle in degrees
+* @return the angle in radians
+*/
+double
+degreesToRadians(double degrees);
 
 } // End namespace
 
