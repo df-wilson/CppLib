@@ -4,4 +4,5 @@ project(cpplib)
 
 add_subdirectory(DataStructs)
 add_subdirectory(CStringUtil)
+add_subdirectory(Math)
 add_subdirectory(test)
