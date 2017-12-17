@@ -3,6 +3,8 @@
 #include "../Math/mathutil.h"
 #include "../Math/Vector3.h"
 
+#include <sstream>
+
 const int DEFAULT_INT = 0;
 const int TEST_INT_X = 1;
 const int TEST_INT_Y = 2;
@@ -134,6 +136,15 @@ TEST_CASE("Test Vector3 subtract", "[vector]")
    REQUIRE(result.x() == TEST_INT_X - TEST_2_INT_X);
    REQUIRE(result.y() == TEST_INT_Y - TEST_2_INT_Y);
    REQUIRE(result.z() == TEST_INT_Z - TEST_2_INT_Z);
+}
+
+TEST_CASE("Test Vector3 operator<<", "[vector]")
+{
+   dw::Vector3<int> intVector(TEST_INT_X, TEST_INT_Y, TEST_INT_Z);
+   std::string contents;
+   std::ostringstream stream;
+   stream << intVector;
+   REQUIRE(stream.str() == "1 2 3");
 }
 
 TEST_CASE("Test Vector3 dot product", "[vector]")
