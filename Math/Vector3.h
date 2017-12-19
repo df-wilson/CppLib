@@ -117,7 +117,7 @@ private:
  * @return The dot product of the two vectors.
  */
 template<typename T>
-T dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) 
+double dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) 
 {
     return v1.x() * v2.x() +
            v1.y() * v2.y() +
@@ -183,10 +183,10 @@ std::ostream& operator<<(std::ostream&  streamOut,
 * 
 * @param v1 The first vector.
 * @param v2 The second vector
-* @return float
+* @return the angle between the two vectors
 */
 template <typename T>
-T angleBetweenVectorsRadians(const Vector3<T>& v1, const Vector3<T>& v2) 
+double angleBetweenVectorsRadians(const Vector3<T>& v1, const Vector3<T>& v2) 
 {
     float angleRadians = 0.0;
     float dotProductResult = dotProduct(v1, v2);
@@ -203,6 +203,41 @@ T angleBetweenVectorsRadians(const Vector3<T>& v1, const Vector3<T>& v2)
     }
 
     return angleRadians;
+}
+
+/**
+ * Check if two vectors are orthogonal.
+ * 
+ * @param v1 The first vector.
+ * @param v2 The second vector.
+ * @return true if the two vectors are orthogonal, false otherwise.
+ */
+template <typename T>
+bool areOrthogonal(const Vector3<T>& v1, const Vector3<T>& v2)
+{
+   T dp = dotProduct(v1,v2);
+ 
+   return isAlmostZero(dp, ZERO_TOLERANCE);
+}
+
+template <typename T>
+bool areParallel(const Vector3<T>& v1, const Vector3<T>& v2)
+{
+   if(isAlmostZero(v1.length(), ZERO_TOLERANCE) ||
+      isAlmostZero(v2.length(), ZERO_TOLERANCE))
+   {
+        return true;
+   }
+   
+   T angleRadians = angleBetweenVectorsRadians(v1, v2);
+   
+   if(isAlmostZero(angleRadians, ZERO_TOLERANCE)           ||
+      isAlmostZero(angleRadians - dw::PI, ZERO_TOLERANCE))
+   {
+      return true;
+   }
+   
+   return false;
 }
 
 } // namespace dw

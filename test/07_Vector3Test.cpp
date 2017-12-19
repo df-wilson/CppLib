@@ -172,3 +172,43 @@ TEST_CASE("Test Vector3 angle betwee vectors", "[vector]")
    angleRadians = dw::angleBetweenVectorsRadians(vector3, vector4);
    REQUIRE(angleRadians == Approx(3.072));
 }
+
+TEST_CASE("Test Vector3 areOrthogonal", "[vector]")
+{
+   dw::Vector3<double> vector1(-7.579, -7.88, 0.0);
+   dw::Vector3<double> vector2(22.737, 23.64, 0.0);
+
+   dw::Vector3<double> vector3(-2.029, 9.97, 4.172);
+   dw::Vector3<double> vector4(-9.231, -6.639, -7.245);
+
+   dw::Vector3<double> vector5(-2.328, -7.284, -1.214);
+   dw::Vector3<double> vector6(-1.821, 1.072, -2.94);
+   
+   dw::Vector3<double> vector7(2.118, 4.827, 0.0);
+   dw::Vector3<double> vector8(0.0, 0.0, 0.0);
+
+   REQUIRE(areOrthogonal(vector1, vector2) == false);
+   REQUIRE(areOrthogonal(vector3, vector4) == false);
+   REQUIRE(areOrthogonal(vector5, vector6) == true);
+   REQUIRE(areOrthogonal(vector7, vector8) == true);
+}
+
+TEST_CASE("Test Vector3 areParallel")
+{
+   dw::Vector3<double> vector1(-7.579, -7.88, 0.0);
+   dw::Vector3<double> vector2(22.737, 23.64, 0.0);
+
+   dw::Vector3<double> vector3(-2.029, 9.97, 4.172);
+   dw::Vector3<double> vector4(-9.231, -6.639, -7.245);
+
+   dw::Vector3<double> vector5(-2.328, -7.284, -1.214);
+   dw::Vector3<double> vector6(-1.821, 1.072, -2.94);
+   
+   dw::Vector3<double> vector7(2.118, 4.827, 0.0);
+   dw::Vector3<double> vector8(0.0, 0.0, 0.0);
+
+   REQUIRE(areParallel(vector1, vector2) == true);
+   REQUIRE(areParallel(vector3, vector4) == false);
+   REQUIRE(areParallel(vector5, vector6) == false);
+   REQUIRE(areParallel(vector7, vector8) == true);
+}
