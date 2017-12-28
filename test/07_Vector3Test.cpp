@@ -147,6 +147,23 @@ TEST_CASE("Test Vector3 operator<<", "[vector]")
    REQUIRE(stream.str() == "1 2 3");
 }
 
+TEST_CASE("Test Vector3 operator==", "[vector]")
+{
+   dw::Vector3<int> vector1(1,2,3);
+   dw::Vector3<int> vector2(1,2,3);
+   dw::Vector3<int> vector3(1,2,2);
+   
+   REQUIRE(vector1 == vector2);
+   REQUIRE(!(vector1 == vector3));
+   
+   dw::Vector3<double> vector4(1.234, 2.234, 3.234);
+   dw::Vector3<double> vector5(1.234, 2.234, 3.234);
+   dw::Vector3<double> vector6(1.234, 2.236, 3.234);
+   
+   REQUIRE(vector4 == vector5);
+   REQUIRE(!(vector4 == vector6));
+}
+
 TEST_CASE("Test Vector3 dot product", "[vector]")
 {
    dw::Vector3<double> vector1(-5.955, -4.904, -1.874);
@@ -193,7 +210,7 @@ TEST_CASE("Test Vector3 areOrthogonal", "[vector]")
    REQUIRE(areOrthogonal(vector7, vector8) == true);
 }
 
-TEST_CASE("Test Vector3 areParallel")
+TEST_CASE("Test Vector3 areParallel", "[vector]")
 {
    dw::Vector3<double> vector1(-7.579, -7.88, 0.0);
    dw::Vector3<double> vector2(22.737, 23.64, 0.0);
@@ -211,4 +228,28 @@ TEST_CASE("Test Vector3 areParallel")
    REQUIRE(areParallel(vector3, vector4) == false);
    REQUIRE(areParallel(vector5, vector6) == false);
    REQUIRE(areParallel(vector7, vector8) == true);
+}
+
+TEST_CASE("Test Vector3 cross product", "[vector]")
+{
+   dw::Vector3<double> vector1(8.462, 7.893, -8.187);
+   dw::Vector3<double> vector2(6.984, -5.975, 4.778);
+   dw::Vector3<double> answer1(-11.205 , -97.609, -105.685);
+   
+   dw::Vector3<int> vector3(1, -1, 2);
+   dw::Vector3<int> vector4(2, 3, -4);
+   dw::Vector3<int> answer2(-2 , 8, 5);
+
+   dw::Vector3<double> vector5(2, 4, -5);
+   dw::Vector3<double> vector6(-3, -2, 1);
+   dw::Vector3<double> answer3(-6 , 13, 8);
+
+   dw::Vector3<double> vector7(2.118, 4.827, 0.0);
+   dw::Vector3<double> vector8(0.0, 0.0, 0.0);
+   dw::Vector3<double> answer4(0.0 ,0.0, 0.0);
+   
+   REQUIRE(dw::crossProduct(vector1, vector2) == answer1);
+   REQUIRE(dw::crossProduct(vector3, vector4) == answer2);
+   REQUIRE(dw::crossProduct(vector5, vector6) == answer3);
+   REQUIRE(dw::crossProduct(vector7, vector8) == answer4);
 }

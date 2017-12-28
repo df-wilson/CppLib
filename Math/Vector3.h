@@ -109,19 +109,14 @@ private:
 
 /*---------  Non Class functions  ----------------*/
 
-/**
- * @brief Finds the dot product of two vectors.
- *
- * @param v1 The first vector
- * @param v2 The second vector
- * @return The dot product of the two vectors.
- */
 template<typename T>
-double dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) 
+bool operator==(const Vector3<T>& lhs, const Vector3<T>& rhs)
 {
-    return v1.x() * v2.x() +
-           v1.y() * v2.y() +
-           v1.z() * v2.z();
+   bool isEqual = false;
+   
+   return(isAlmostZero(lhs.x() - rhs.x(), ZERO_TOLERANCE) &&
+          isAlmostZero(lhs.y() - rhs.y(), ZERO_TOLERANCE) &&
+          isAlmostZero(lhs.z() - rhs.z(), ZERO_TOLERANCE));
 }
 
 /**
@@ -238,6 +233,38 @@ bool areParallel(const Vector3<T>& v1, const Vector3<T>& v2)
    }
    
    return false;
+}
+
+/**
+ * Calculates the cross product of two vectors.
+ * 
+ * @param v1 the first vector.
+ * @param v2 the second vector.
+ * @return the cross product as a vector of the same type.
+ */
+template <typename T>
+Vector3<T> crossProduct(const Vector3<T>& v1, const Vector3<T>& v2)
+{
+   T x = v1.y() * v2.z() - v2.y() * v1.z();
+   T y = -(v1.x() * v2.z() - v2.x() * v1.z());
+   T z = v1.x() * v2.y() - v2.x() * v1.y();
+   
+   return Vector3<T>(x, y, z);
+}
+
+/**
+ * @brief Finds the dot product of two vectors.
+ *
+ * @param v1 The first vector
+ * @param v2 The second vector
+ * @return The dot product of the two vectors.
+ */
+template<typename T>
+double dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) 
+{
+    return v1.x() * v2.x() +
+           v1.y() * v2.y() +
+           v1.z() * v2.z();
 }
 
 } // namespace dw
