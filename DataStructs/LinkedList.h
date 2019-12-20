@@ -5,7 +5,7 @@
  * @version 1.2
  * @date    January 14, 2014
  *
- * Library  UTIL
+ * Library  DataStruct
  * 
  * Provides a linked list container. New copies of the data created and
  * added to the list. The original copy can be deleted after it has been
@@ -17,14 +17,14 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+/*---------  Program Includes  ----------------*/
+
+
 /*---------  System Includes  -----------------*/
 
 #include <cstddef>
 #include <string>
 #include <stdexcept>
-
-/*---------  Program Includes  ----------------*/
-
 
 /*---------  Class Definition  ----------------*/
 namespace dw {
@@ -165,7 +165,7 @@ public:
 	*
 	* @returns   the first element in the list.
 	*/
-	T& getFirst() throw (std::out_of_range)
+	T& getFirst()
 	{
 		if(mHead == nullptr)
 		{
@@ -187,7 +187,7 @@ public:
 	*
 	* @returns   the last element in the list.
 	*/
-	T& getLast() throw (std::out_of_range)
+	T& getLast()
 	{
 		if(mTail == nullptr)
 		{
@@ -211,7 +211,7 @@ public:
 	*
 	* @return    the next element in the list. This is for read-only access.
 	*/
-	T& getNext() throw (std::out_of_range, std::logic_error)
+	T& getNext()
 	{
 		if(mCurrent == nullptr)
 		{
@@ -238,7 +238,7 @@ public:
 	*
 	* @return    the previous element in the list. This is for read-only access.
 	*/
-	T& getPrev() throw (std::out_of_range, std::logic_error)
+	T& getPrev()
 	{
 		if(mCurrent == mHead)
 		{
@@ -281,7 +281,7 @@ public:
 	* @return the last element of the list.
 	*
 	*/
-	T popFirstElement() throw(std::out_of_range, std::logic_error)
+	T popFirstElement()
 	{
 		int lNumElements = numElements();
 		
@@ -331,7 +331,7 @@ public:
 	* @return the last element of the list.
 	*
 	*/
-	T popLastElement() throw(std::out_of_range, std::logic_error)
+	T popLastElement()
 	{
 		int lNumElements = numElements();
 
@@ -382,7 +382,7 @@ public:
 	* 
 	* @return void
 	*/
-	void removeFirstElement() throw(std::logic_error)
+	void removeFirstElement()
 	{
 		int lNumElements = numElements();
 		
@@ -427,7 +427,7 @@ public:
 	* 
 	* @exception std::logic_error Thrown if the list is empty, but the head and tail are not null.
 	*/
-	void removeLastElement() throw(std::logic_error)
+	void removeLastElement()
 	{
 		int lNumElements = numElements();
 
