@@ -1,6 +1,5 @@
 /**
  * @class   Vector3
- * @brief   A 3D vector.
  * @author  Dean Wilson
  * @version 1.0
  * @date    March 3, 2014
@@ -14,12 +13,12 @@
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
+/*---------  Program Includes  ----------------*/
+#include "mathutil.h"
+
 /*---------  System Includes  -----------------*/
 #include <cmath>
 #include <iostream>
-
-/*---------  Program Includes  ----------------*/
-#include "mathutil.h"
 
 /*---------  Class Definition  ----------------*/
 
@@ -76,7 +75,7 @@ public:
    }
 
    /**
-    * @brief Returns the length of the vector
+    * Returns the length of the vector
     *
     * @return The length of the vector in the same units as the input parameters.
     */
@@ -87,7 +86,7 @@ public:
    }
 
    /**
-    * @brief Implements the negate operator and returns the result.
+    * Implements the negate operator and returns the result.
     * The original object is not modified.
     *
     * @return A vector3 that is the negated version of this Vector3.
@@ -120,7 +119,7 @@ bool operator==(const Vector3<T>& lhs, const Vector3<T>& rhs)
 }
 
 /**
- * @brief Implements the addition operator for Vector3 types. Returns a Vector3
+ * Implements the addition operator for Vector3 types. Returns a Vector3
  * that contains the result of v1 + v3 using standard vector addition.
  *
  * @param v1 The first vector
@@ -138,7 +137,7 @@ Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2)
 }
 
 /**
- * @brief Implements subtraction operator for Vector3 types. Returns a vector3
+ * Implements subtraction operator for Vector3 types. Returns a vector3
  * that contains the result of v1 - v2 using standard vector subtraction.
  *
  * @param v1 The first vector
@@ -156,7 +155,7 @@ Vector3<T> operator- (const Vector3<T>& v1, const Vector3<T> v2)
 }
 
 /**
- * @brief Implements the ostream operator. Output is in the form x y z
+ * Implements the ostream operator. Output is in the form x y z
  *
  * @param streamOut The output stream
  * @param vector The vector to output
@@ -174,17 +173,17 @@ std::ostream& operator<<(std::ostream&  streamOut,
 }
 
 /**
-* @brief Find the angle between two vectors in radians.
-* 
-* @param v1 The first vector.
-* @param v2 The second vector
-* @return the angle between the two vectors
-*/
+ * Find the angle between two vectors in radians.
+ * 
+ * @param v1 The first vector.
+ * @param v2 The second vector
+ * @return the angle between the two vectors
+ */
 template <typename T>
 double angleBetweenVectorsRadians(const Vector3<T>& v1, const Vector3<T>& v2) 
 {
-    float angleRadians = 0.0;
-    float dotProductResult = dotProduct(v1, v2);
+    double angleRadians = 0.0;
+    double dotProductResult = dotProduct(v1, v2);
 
     if(isAlmostZero(v1.length(), ZERO_TOLERANCE)   ||
        isAlmostZero(v2.length(), ZERO_TOLERANCE))
@@ -193,7 +192,7 @@ double angleBetweenVectorsRadians(const Vector3<T>& v1, const Vector3<T>& v2)
     }
     else
     {
-        float lCos = dotProductResult / (v1.length() * v2.length());
+        double lCos = dotProductResult / (v1.length() * v2.length());
         angleRadians = acos(lCos);
     }
 
@@ -215,6 +214,13 @@ bool areOrthogonal(const Vector3<T>& v1, const Vector3<T>& v2)
    return isAlmostZero(dp, ZERO_TOLERANCE);
 }
 
+/**
+ * Tests to see if 2 vectors are parallel.
+ *
+ * @param v1 The first vector.
+ * @param v2 The second vector.
+ * @return true if the two vectors are orthogonal, false otherwise.
+ */
 template <typename T>
 bool areParallel(const Vector3<T>& v1, const Vector3<T>& v2)
 {
@@ -253,7 +259,7 @@ Vector3<T> crossProduct(const Vector3<T>& v1, const Vector3<T>& v2)
 }
 
 /**
- * @brief Finds the dot product of two vectors.
+ * Finds the dot product of two vectors.
  *
  * @param v1 The first vector
  * @param v2 The second vector
