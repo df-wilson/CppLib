@@ -29,5 +29,8 @@ install_manifest.txt
 
 build/
 
-IDE files
+#IDE files
 *.kdev4
+
+#Mac specific
+.DS_Store
