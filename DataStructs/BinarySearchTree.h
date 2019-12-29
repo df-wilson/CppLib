@@ -5,7 +5,7 @@
 * @version 1.2
 * @date    January 27, 2014
 *
-* Library  UTIL
+* Library  DataStructs 
 *
 * Provides a binary search tree. New copies of the data created and
 * added to the tree. The original copy can be deleted after it has been
