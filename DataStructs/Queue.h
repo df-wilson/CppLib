@@ -2,10 +2,10 @@
  * @class   Queue
  * @brief   Implements a queue.
  * @author  Dean Wilson
- * @version 1.0
+ * @version 1.2
  * @date    January 14, 2014
  *
- * Library  UTIL
+ * Library  DataStructs
  *
  * Implements a basic queue. The queue is usable by any object type as well
  * as basic types. When an object is added to the queue a new copy is created.
@@ -13,15 +13,16 @@
  *
  */
 
-#ifndef QUEUE_H_
-#define QUEUE_H_
+#ifndef QUEUE_H
+#define QUEUE_H
+
+/*---------  Program Includes  ----------------*/
+#include "LinkedList.h"
 
 /*---------  System Includes  -----------------*/
 #include <cstddef>
 #include <stdexcept>
 
-/*---------  Program Includes  ----------------*/
-#include "LinkedList.h"
 
 namespace dw {
 
@@ -56,7 +57,7 @@ public:
 	 * @throw std::out_of_range
 	 * @throw std::std::logic_error
 	 */
-	T dequeue() throw (std::out_of_range, std::logic_error)
+	T dequeue()
 	{
 		T temp;
 		try
@@ -105,7 +106,7 @@ public:
 	 *
 	 * @throw std::out_of_range
 	 */
-	const T& peek() const throw (std::out_of_range)
+	const T& peek() const
 	{
 		try {
 			return mLinkedList->getFirst();
@@ -126,4 +127,4 @@ private:
 
 } // End namepace dw
 
-#endif // QUEUE_H_
+#endif // QUEUE_H
