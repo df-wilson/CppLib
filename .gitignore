@@ -19,6 +19,7 @@
 *.exe
 *.out
 *.app
+test/tests
 
 #CMake files
 CMakeCache.txt
