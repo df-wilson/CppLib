@@ -1,5 +1,5 @@
 /**
- * A collection of math utilities.
+ * mathutil.h
  *
  * @author  Dean Wilson
  * @version 1.0
@@ -7,6 +7,7 @@
  *
  * Library  MATH
  *
+ * A collection of math utilities.
  */
 
 #ifndef DW_MATH_UTIL_H
