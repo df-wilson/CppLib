@@ -2,7 +2,7 @@
 * @class   BinarySearchTree
 * @brief   Implements a binary search tree.
 * @author  Dean Wilson
-* @version 1.1
+* @version 1.2
 * @date    January 27, 2014
 *
 * Library  UTIL
@@ -68,7 +68,7 @@ public:
 	 * @throw runtime_error If the tree is empty.
 	 * @return T& The maximum value stored in the tree.
 	 */
-	T& getMax() throw (std::runtime_error)
+	T& getMax()
 	{
 		shared_ptr<Node> temp = mRoot;
 
@@ -90,7 +90,7 @@ public:
 	 * @throw runtime_error if the tree is empty
 	 * @return T& The maximum value stored in the tree.
 	 */
-	T& getMin() throw (std::runtime_error)
+	T& getMin()
 	{
 		shared_ptr<Node> temp = mRoot;
 		if(temp == nullptr)
