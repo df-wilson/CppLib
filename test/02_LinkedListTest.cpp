@@ -1,6 +1,9 @@
 #include "catch.hpp"
+
 #include "../DataStructs/LinkedList.h"
 
+#include <iostream>
+#include <stdexcept>
 #include <string>
 
 using namespace std;
@@ -19,7 +22,7 @@ TEST_CASE("Test add element to linked list", "[linked-list]")
 {
    dw::LinkedList<std::string> list;
    REQUIRE(list.numElements() == NO_ELEMENTS);
-   
+
    list.add(string1);
    REQUIRE(list.numElements() == ONE_ELEMENT);
 
@@ -47,10 +50,10 @@ TEST_CASE("Test add element to front", "[linked-list]")
 {
    dw::LinkedList<std::string> list;
    REQUIRE(list.numElements() == NO_ELEMENTS);
-	
+
 	list.addToFront(string1);
-	REQUIRE(list.numElements() == ONE_ELEMENT);
-   
+   REQUIRE(list.numElements() == ONE_ELEMENT);
+
    list.addToFront(string2);
    REQUIRE(list.numElements() == TWO_ELEMENTS);
    REQUIRE(list.getFirst() == string2);
@@ -77,7 +80,7 @@ TEST_CASE("Test get number of elements", "[linked-list]")
 	*/
    dw::LinkedList<std::string> list;
 	REQUIRE(list.numElements() == NO_ELEMENTS);
-
+      
 	/* test that num elements works when an element has been added.
 	*/
 	list.add(string1);
@@ -97,7 +100,7 @@ TEST_CASE("Test get first", "[linked-list]")
 {
    dw::LinkedList<std::string> list;
    REQUIRE_THROWS_AS(list.getFirst(), std::out_of_range);
-
+      
    list.add(string1);
    list.add(string2);
    REQUIRE(list.getFirst() == string1);
@@ -107,7 +110,7 @@ TEST_CASE("Test get last", "[linked-list]")
 {
    dw::LinkedList<std::string> list;
    REQUIRE_THROWS_AS(list.getLast(), std::out_of_range);
-
+      
    list.add(string1);
    list.add(string2);
    REQUIRE(list.getLast() == string2);
@@ -117,7 +120,7 @@ TEST_CASE("Test get next",  "[linked-list]")
 {
    dw::LinkedList<std::string> list;
    REQUIRE_THROWS_AS(list.getNext(), std::logic_error);
-
+   
    list.add(string1);
    list.add(string2);
    list.add(string3);
@@ -132,11 +135,11 @@ TEST_CASE("Test get previous", "[linked-list]")
 {
    dw::LinkedList<std::string> list;
    REQUIRE_THROWS_AS(list.getPrev(), std::logic_error);
-
+      
    list.add(string1);
    list.add(string2);
    list.add(string3);
-   
+
    REQUIRE(list.getLast() == string3);
    REQUIRE(list.getPrev() == string2);
    REQUIRE(list.getPrev() == string1);
@@ -162,7 +165,7 @@ TEST_CASE("Test copy constructor", "[linked-list]")
 TEST_CASE("Test assignment operator", "[linked-list]")
 {
    dw::LinkedList<std::string> list1;
-   
+      
    list1.add(string1);
    list1.add(string2);
    list1.add(string3);
@@ -193,15 +196,31 @@ TEST_CASE("Test remove first element", "[linked-list]")
 
    // Test removing an element from the front of a list with 1 element.
    list.add(string1);
-   REQUIRE(list.numElements() == ONE_ELEMENT);
-   
+
    list.removeFirstElement();
+
    REQUIRE(list.numElements() == NO_ELEMENTS);
+
+   // Test removing the first element when there are more than one element in the list.
+   list.add(string1);
+   list.add(string2);
+   
+   REQUIRE_NOTHROW(list.removeFirstElement());
+   REQUIRE(list.numElements() == ONE_ELEMENT);
+   REQUIRE(list.getFirst() == string2);
+
+   // Test that removing an element from a list that had elements but is now
+   // empty works correctly
+   REQUIRE_NOTHROW(list.removeFirstElement());
+   REQUIRE(list.numElements() == NO_ELEMENTS);
+   REQUIRE_THROWS_AS(list.getFirst(), std::out_of_range);
+   
 }
 
 TEST_CASE("Test remove last element", "[linked-list]")
 {
    dw::LinkedList<std::string> list;
+      
    REQUIRE_NOTHROW(list.removeLastElement());
 
    // Test removing an element when there is only one in the list
@@ -215,12 +234,17 @@ TEST_CASE("Test remove last element", "[linked-list]")
    list.add(string1);
    list.add(string2);
    list.removeLastElement();
+
    REQUIRE(list.numElements() == ONE_ELEMENT);
    REQUIRE(list.getFirst() == string1);
 
+	// Test that removing an element from a list that had elements but is now
+	// empty works correctly
    list.removeLastElement();
-   REQUIRE(list.numElements() == NO_ELEMENTS);
 
+   REQUIRE(list.numElements() == NO_ELEMENTS);
+   REQUIRE_THROWS_AS(list.getFirst(), std::out_of_range);
+   
    // Test that removing an element from a list that had elements but is now
    // empty works correctly
    REQUIRE_NOTHROW(list.removeLastElement());
