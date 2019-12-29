@@ -1,10 +1,12 @@
 /**
  * @class   Vector3
- * @author  Dean Wilson
- * @version 1.0
- * @date    March 3, 2014
- * Library  Math
  *
+ * @author  Dean Wilson
+ * @version 1.2
+ * @date    March 3, 2014
+ *
+ * Library  MATH
+ * 
  * Math 3D vector implementation. Contains values x,y,z.
  * Can be used with ints, floats, etc, or classes that implement math operators
  * such as +, -, *, /, <, >, =.
@@ -67,33 +69,65 @@ public:
     * @param z The x value
     * @return void
     */
-   void set(T x, T y, T z) 
+   void set(T x, T y, T z)
    {
-       mX = x;
-       mY = y;
-       mZ = z;
+      mX = x;
+      mY = y;
+      mZ = z;
    }
 
    /**
-    * Returns the length of the vector
+    * Returns the length of the vector.
     *
     * @return The length of the vector in the same units as the input parameters.
     */
-   T length() const 
+   T length() const
    {
       T length = sqrt((mX * mX) + (mY * mY) + (mZ * mZ));
       return length;
    }
 
    /**
+    * Returns the unit vector.
+    * 
+    * @return the unit vector
+    */
+   Vector3<T> unitVector() const
+   {
+      T length = this->length();
+       
+      if(length != dw::isAlmostZero(length, ZERO_TOLERANCE)) 
+      {
+         Vector3<T> vector(mX / length, mY / length, mZ / length); 
+         return vector;
+      } 
+      else
+      {
+         Vector3<T> vector(0,0,0);
+         return vector;
+      }
+   }
+   
+   /**
     * Implements the negate operator and returns the result.
     * The original object is not modified.
     *
     * @return A vector3 that is the negated version of this Vector3.
     */
-   Vector3<T> operator-() const 
+   Vector3<T> operator-() const
    {
-       return Vector3(-mX, -mY, -mZ);
+      return Vector3(-mX, -mY, -mZ);
+   }
+   
+   /**
+    * Multiply the vector by a scaler.
+    * 
+    * @param scale the scalar value to multiply the vector by.
+    * @return a new vector that has been multiplied by the scalar value.
+    */ 
+   Vector3<T> operator*(double scale) const
+   {
+      return Vector3(mX*scale, mY*scale, mZ*scale);
    }
 
 private:
@@ -127,13 +161,13 @@ bool operator==(const Vector3<T>& lhs, const Vector3<T>& rhs)
  * @return The dot product of the two vectors.
  */
 template<typename T>
-Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2) 
+Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2)
 {
-    T x = v1.x() + v2.x();
-    T y = v1.y() + v2.y();
-    T z = v1.z() + v2.z();
+   T x = v1.x() + v2.x();
+   T y = v1.y() + v2.y();
+   T z = v1.z() + v2.z();
 
-    return Vector3<T>(x, y, z);
+   return Vector3<T>(x, y, z);
 }
 
 /**
@@ -145,17 +179,17 @@ Vector3<T> operator+ (const Vector3<T>& v1, const Vector3<T>& v2)
  * @return Another vector that contains the result of v1 - v2.
  */
 template<typename T>
-Vector3<T> operator- (const Vector3<T>& v1, const Vector3<T> v2) 
+Vector3<T> operator- (const Vector3<T>& v1, const Vector3<T> v2)
 {
-    T x = v1.x() - v2.x();
-    T y = v1.y() - v2.y();
-    T z = v1.z() - v2.z();
+   T x = v1.x() - v2.x();
+   T y = v1.y() - v2.y();
+   T z = v1.z() - v2.z();
 
-    return Vector3<T>(x,y,z);
+   return Vector3<T>(x,y,z);
 }
 
 /**
- * Implements the ostream operator. Output is in the form x y z
+ * Implements the ostream operator. Output is in the form x y z.
  *
  * @param streamOut The output stream
  * @param vector The vector to output
@@ -165,45 +199,58 @@ template<typename T>
 std::ostream& operator<<(std::ostream&  streamOut,
                          const Vector3<T>&  vector)
 {
-    streamOut << vector.x()
-    << " " << vector.y()
-    << " " << vector.z();
+   streamOut << vector.x() << " " << vector.y() << " " << vector.z();
 
-    return streamOut;
+   return streamOut;
 }
 
 /**
- * Find the angle between two vectors in radians.
- * 
- * @param v1 The first vector.
+ * Finds the dot product of two vectors.
+ *
+ * @param v1 The first vector
  * @param v2 The second vector
- * @return the angle between the two vectors
+ * @return The dot product of the two vectors.
  */
+template<typename T>
+double dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) 
+{
+   return v1.x() * v2.x() +
+          v1.y() * v2.y() +
+          v1.z() * v2.z();
+}
+
+/**
+* Find the angle between two vectors in radians.
+* 
+* @param v1 The first vector
+* @param v2 The second vector
+* @return the angle between the two vectors.
+*/
 template <typename T>
 double angleBetweenVectorsRadians(const Vector3<T>& v1, const Vector3<T>& v2) 
 {
-    double angleRadians = 0.0;
-    double dotProductResult = dotProduct(v1, v2);
+   double angleRadians = 0.0;
+   double dotProductResult = dotProduct(v1, v2);
 
-    if(isAlmostZero(v1.length(), ZERO_TOLERANCE)   ||
-       isAlmostZero(v2.length(), ZERO_TOLERANCE))
-    {
-        angleRadians = 0.0;
-    }
-    else
-    {
-        double lCos = dotProductResult / (v1.length() * v2.length());
-        angleRadians = acos(lCos);
-    }
+   if(isAlmostZero(v1.length(), ZERO_TOLERANCE)   ||
+      isAlmostZero(v2.length(), ZERO_TOLERANCE))
+   {
+      angleRadians = 0.0;
+   }
+   else
+   {
+      double lCos = dotProductResult / (v1.length() * v2.length());
+      angleRadians = acos(lCos);
+   }
 
-    return angleRadians;
+   return angleRadians;
 }
 
 /**
  * Check if two vectors are orthogonal.
  * 
- * @param v1 The first vector.
- * @param v2 The second vector.
+ * @param v1 The first vector
+ * @param v2 The second vector
  * @return true if the two vectors are orthogonal, false otherwise.
  */
 template <typename T>
@@ -215,8 +262,8 @@ bool areOrthogonal(const Vector3<T>& v1, const Vector3<T>& v2)
 }
 
 /**
- * Tests to see if 2 vectors are parallel.
- *
+ * Check if two vectors are parallel.
+ * 
  * @param v1 The first vector.
  * @param v2 The second vector.
  * @return true if the two vectors are orthogonal, false otherwise.
@@ -244,8 +291,8 @@ bool areParallel(const Vector3<T>& v1, const Vector3<T>& v2)
 /**
  * Calculates the cross product of two vectors.
  * 
- * @param v1 the first vector.
- * @param v2 the second vector.
+ * @param v1 the first vector
+ * @param v2 the second vector
  * @return the cross product as a vector of the same type.
  */
 template <typename T>
@@ -256,21 +303,6 @@ Vector3<T> crossProduct(const Vector3<T>& v1, const Vector3<T>& v2)
    T z = v1.x() * v2.y() - v2.x() * v1.y();
    
    return Vector3<T>(x, y, z);
-}
-
-/**
- * Finds the dot product of two vectors.
- *
- * @param v1 The first vector
- * @param v2 The second vector
- * @return The dot product of the two vectors.
- */
-template<typename T>
-double dotProduct(const Vector3<T>& v1, const Vector3<T>& v2) 
-{
-    return v1.x() * v2.x() +
-           v1.y() * v2.y() +
-           v1.z() * v2.z();
 }
 
 } // namespace dw

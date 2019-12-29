@@ -138,6 +138,15 @@ TEST_CASE("Test Vector3 subtract", "[vector]")
    REQUIRE(result.z() == TEST_INT_Z - TEST_2_INT_Z);
 }
 
+TEST_CASE("Test Vector3 scalar test", "[vector]")
+{
+   dw::Vector3<double> vector2(1.671, -1.012, -0.318);
+   
+   dw::Vector3<double> vector4 = vector2 * 7.41;
+   
+   std::cout << std::endl << "Question 3: " << vector4 << std::endl;
+}
+
 TEST_CASE("Test Vector3 operator<<", "[vector]")
 {
    dw::Vector3<int> intVector(TEST_INT_X, TEST_INT_Y, TEST_INT_Z);
@@ -162,6 +171,16 @@ TEST_CASE("Test Vector3 operator==", "[vector]")
    
    REQUIRE(vector4 == vector5);
    REQUIRE(!(vector4 == vector6));
+}
+
+TEST_CASE("Test Vector3 unit vector")
+{
+    dw::Vector3<double> vector1(5.581, -2.136, 0);
+    std::cout << std::endl << "UnitVector is: " << vector1.unitVector() << std::endl;
+    
+    dw::Vector3<double> vector2(1.996, 3.108, -4.554);
+    std::cout << "UnitVector is: " << vector2.unitVector() << std::endl;
+    
 }
 
 TEST_CASE("Test Vector3 dot product", "[vector]")
