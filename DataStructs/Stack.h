@@ -1,38 +1,25 @@
-/**************************  FILE HEADER  ********************************
+/**
+ * @class   Stack
+ * @brief   A basic stack.
+ * @author  Dean Wilson
+ * @version 1.1
+ * @date    December 12, 2013
  *
- * Author:    Dean Wilson    December 2013
- *
- * Application: Practice Cpp
- *
- * Class:       Stack
- * Methods
- * Public:      Stack
- *              ~Stack
- *              emptyStack
- *              numElements
- *              peek
- *              pop
- *              push
- *
- * Private:
- *
- *
- * Overview:
- *
+ * Library  DataStructs
+ * 
  * Implements a basic stack. The stack is usable by any object type as well
  * as basic types. When an object is added to the stack a new copy is created.
- *
- **************************************************************************
  */
 
 #ifndef STACK_H_
 #define STACK_H_
 
-/*---------  System Includes  -----------------*/
-
 /*---------  Program Includes  ----------------*/
 
 #include "LinkedList.h"
+
+/*---------  System Includes  -----------------*/
+
 
 namespace dw {
 
@@ -90,7 +77,7 @@ public:
     *
     * @return  the address of the object at the top of the stack
     */
-   const T& peek() const throw (std::out_of_range)
+   const T& peek() const
    {
       try
       {
@@ -110,7 +97,7 @@ public:
     *
     * @return the object on the top of the stack
     */
-   T pop() const throw (std::out_of_range, std::logic_error)
+   T pop() const
    {
       try
       {
