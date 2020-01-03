@@ -1,10 +1,8 @@
-// Let Catch provide main():
-#define CATCH_CONFIG_MAIN
-
+#define CATCH_CONFIG_RUNNER
 #include "catch.hpp"
 
-TEST_CASE( "1: All test cases reside in other .cpp files (empty)", "[multi-file:1]" ) 
+int main(int argc, char* argv[])
 {
-
+   int result = Catch::Session().run( argc, argv );
+   return result;
 }
-
