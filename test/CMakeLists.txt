@@ -8,9 +8,9 @@ set(SOURCE_FILES
     02_LinkedListTest.cpp
     03_QueueTest.cpp
     04_StackTest.cpp
-    05_CStringUtilTest.cpp
     07_Vector3Test.cpp
     101_FractionTest.cpp
+    301_CStringUtilTest.cpp
 )
 
 add_executable(tests ${SOURCE_FILES}) 

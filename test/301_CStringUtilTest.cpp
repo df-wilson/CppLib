@@ -1,6 +1,6 @@
 #include "catch.hpp"
-#include "../CStringUtil/CStringUtils.h"
-#include <iostream>
+
+#include "../StringUtil/CStringUtils.h"
 
 const char val1Str[] = "123456";
 const char val2Str[] = "0";
