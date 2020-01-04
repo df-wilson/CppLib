@@ -14,8 +14,7 @@ const int val1 = 123456;
 const int val2 = 0;
 const int val3 = -123456;
 
-
-TEST_CASE("Test strlen functionality", "[CStringUtil]")
+TEST_CASE("CStringUtils strlen test", "StringUtil")
 {
    int size = dw::strlen(val1Str);
    REQUIRE(size == 6);
@@ -30,7 +29,7 @@ TEST_CASE("Test strlen functionality", "[CStringUtil]")
    REQUIRE(size == 0);
 }
 
-TEST_CASE("Test strncmp functionality", "[CStringUtil]")
+TEST_CASE("CstringUtils strncmp test", "StringUtil")
 {
 
    int result = dw::strncmp(val1Str, val1Str, dw::strlen(val1Str));
@@ -52,7 +51,21 @@ TEST_CASE("Test strncmp functionality", "[CStringUtil]")
    REQUIRE(result == 0);
 }
 
-TEST_CASE("Test itoa functionality", "[CStringUtil]")
+TEST_CASE("CStringUtils atoi test", "StringUtil")
+{
+   int ret = 0;
+   
+   ret = dw::atoi(val1Str);
+   REQUIRE(ret == val1);
+
+   ret = dw::atoi(val2Str);
+   REQUIRE(ret == val2);
+
+   ret = dw::atoi(val3Str);
+   REQUIRE(ret == val3);
+}
+
+TEST_CASE("CStringUtils itoa test", "StringUtil")
 {
    char *numStr = new char[50];
   
@@ -80,21 +93,7 @@ TEST_CASE("Test itoa functionality", "[CStringUtil]")
    delete[] numStr;
 }
 
-TEST_CASE("Test atoi functionality", "[CStringUtil]")
-{
-   int ret = 0;
-   
-   ret = dw::atoi(val1Str);
-   REQUIRE(ret == val1);
-
-   ret = dw::atoi(val2Str);
-   REQUIRE(ret == val2);
-
-   ret = dw::atoi(val3Str);
-   REQUIRE(ret == val3);
-}
-
-TEST_CASE("Test isCharOneOf functionality", "[CStringUtil]")
+TEST_CASE("CStringUtils isCharOneOf test", "StringUtil")
 {
    REQUIRE(dw::isCharOneOf('a', val1Str) == false);
    REQUIRE(dw::isCharOneOf('2', val1Str) == true);
