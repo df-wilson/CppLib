@@ -72,23 +72,48 @@ TEST_CASE("Complex: Inquality test", "MATH")
 TEST_CASE("Complex: Magnitude Test", "MATH")
 {
    dw::Complex complex(-4, -3);
-   double magnitude = complex.getMagnitude();
+   double magnitude = complex.magnitude();
    REQUIRE(magnitude == Approx(5.0).margin(0.0001));
    
    dw::Complex complex2(3, 4);
-   double magnitude2 = complex2.getMagnitude();
+   double magnitude2 = complex2.magnitude();
    REQUIRE(magnitude2 == Approx(5.0).margin(0.0001));
 }
 
-TEST_CASE("Complex: Angle Test", "MATH")
+TEST_CASE("Complex: Angle Test", "Math")
 {
+   // Test with default complex number
+   dw::Complex x;
+   double angle = x.angleRad();
+   REQUIRE(angle == Approx(0.0).margin(0.0001));
+   
+   // Test with real portion only
+   dw::Complex y(5);
+   angle = y.angleRad();
+   REQUIRE(angle == Approx(0.0).margin(0.0001));
+   
+   // Test with imaginary portion only
+   dw::Complex z(0,5);
+   angle = z.angleRad();
+   REQUIRE(angle == Approx(3.14159 / 2.0).margin(0.0001));
+   
+   // Test with imaginary portion only
+   dw::Complex b(5,5);
+   angle = b.angleRad();
+   REQUIRE(angle == Approx(3.14159 / 4).margin(0.0001));
+   
+   // Test negative
+   dw::Complex a(-5,-8);
+   angle = a.angleRad();
+   REQUIRE(angle == Approx(4.1538).margin(0.0001));
+   
    dw::Complex complex(-4, -3);
-   double angle = complex.getAngleRad();
+   angle = complex.angleRad();
    REQUIRE(angle == Approx(3.7850).margin(0.0001));
    
    dw::Complex complex2(3, 4);
-   double angle2 = complex2.getAngleRad();
-   REQUIRE(angle2 == Approx(0.9273).margin(0.0001));
+   angle = complex2.angleRad();
+   REQUIRE(angle == Approx(0.9273).margin(0.0001));
 }
 
 TEST_CASE("Complex: operator/", "Math")

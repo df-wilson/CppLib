@@ -69,7 +69,7 @@ Complex& Complex::operator/=(const Complex& rhs)
 }
 
 
-double Complex::getMagnitude() const
+double Complex::magnitude() const
 {
    if(mMagnitude == 0.0) {
       mMagnitude = std::sqrt(mR*mR + mI*mI);
@@ -79,7 +79,7 @@ double Complex::getMagnitude() const
 }
 
 
-double Complex::getAngleRad() const
+double Complex::angleRad() const
 {
    if(mAngle == 0.0) {
       if(mR == 0.0 && mI == 0.0) {

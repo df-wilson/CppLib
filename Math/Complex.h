@@ -59,7 +59,7 @@ public:
      * 
      * @return double
      */
-    double getMagnitude() const;
+    double magnitude() const;
     
     
     /**
@@ -67,7 +67,7 @@ public:
      * 
      * @return double
      */
-    double getAngleRad() const;
+    double angleRad() const;
     
     
     /**
