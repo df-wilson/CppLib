@@ -69,6 +69,28 @@ TEST_CASE("Complex: Inquality test", "MATH")
    REQUIRE_FALSE(x != z);
 }
 
+TEST_CASE("Complex: Magnitude Test", "MATH")
+{
+   dw::Complex complex(-4, -3);
+   double magnitude = complex.getMagnitude();
+   REQUIRE(magnitude == Approx(5.0).margin(0.0001));
+   
+   dw::Complex complex2(3, 4);
+   double magnitude2 = complex2.getMagnitude();
+   REQUIRE(magnitude2 == Approx(5.0).margin(0.0001));
+}
+
+TEST_CASE("Complex: Angle Test", "MATH")
+{
+   dw::Complex complex(-4, -3);
+   double angle = complex.getAngle();
+   REQUIRE(angle == Approx(3.7850).margin(0.0001));
+   
+   dw::Complex complex2(3, 4);
+   double angle2 = complex2.getAngle();
+   REQUIRE(angle2 == Approx(0.9273).margin(0.0001));
+}
+
 TEST_CASE("Complex: operator/", "Math")
 {
    dw::Complex x(3, -2);
