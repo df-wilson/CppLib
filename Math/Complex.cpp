@@ -79,7 +79,7 @@ double Complex::getMagnitude() const
 }
 
 
-double Complex::getAngle() const
+double Complex::getAngleRad() const
 {
    if(mAngle == 0.0) {
       if(mR == 0.0 && mI == 0.0) {

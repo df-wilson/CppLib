@@ -83,11 +83,11 @@ TEST_CASE("Complex: Magnitude Test", "MATH")
 TEST_CASE("Complex: Angle Test", "MATH")
 {
    dw::Complex complex(-4, -3);
-   double angle = complex.getAngle();
+   double angle = complex.getAngleRad();
    REQUIRE(angle == Approx(3.7850).margin(0.0001));
    
    dw::Complex complex2(3, 4);
-   double angle2 = complex2.getAngle();
+   double angle2 = complex2.getAngleRad();
    REQUIRE(angle2 == Approx(0.9273).margin(0.0001));
 }
 

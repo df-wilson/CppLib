@@ -63,11 +63,11 @@ public:
     
     
     /**
-     * Get the polar form angle.
+     * Get the polar form angle in radians.
      * 
      * @return double
      */
-    double getAngle() const;
+    double getAngleRad() const;
     
     
     /**
