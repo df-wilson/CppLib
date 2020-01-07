@@ -141,6 +141,63 @@ TEST_CASE("Complex: Angle Test", "Math")
    REQUIRE(angle == Approx(0.9273).margin(0.0001));
 }
 
+TEST_CASE("Complex: operator+", "Math")
+{
+   dw::Complex x(5.5, 10.5);
+   dw::Complex y(15.5, 4.5);
+   dw::Complex z;
+   
+   // Test adding 2 complex objects
+   z = x + y;
+   double real = z.getR();
+   double imaginary = z.getI();
+   REQUIRE(real == Approx(21.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(15.0).margin(0.0001));
+   
+   // Test adding an integer
+   z = x + 4;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(9.5).margin(0.0001));
+   REQUIRE(imaginary == Approx(10.5).margin(0.0001));
+   
+   z = 4.5 + x;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(10.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(10.5).margin(0.0001));
+}
+
+TEST_CASE("Complex: operator+=", "Math")
+{
+   dw::Complex x(5.5, 10.5);
+   dw::Complex y(15.5, 4.5);
+   dw::Complex z;
+   
+   // Test adding 2 complex objects
+   z += x;
+   z += y;
+   double real = z.getR();
+   double imaginary = z.getI();
+   REQUIRE(real == Approx(21.0).margin(0.0001));
+   (imaginary == Approx(15.0).margin(0.0001));
+   
+   // Test adding an integer
+   z = x;
+   z += 4;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(9.5).margin(0.0001));
+   REQUIRE(imaginary == Approx(10.5).margin(0.0001));
+   
+   z = x;
+   z += 4.5;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(10.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(10.5).margin(0.0001));
+}
+
 TEST_CASE("Complex: operator/", "Math")
 {
    dw::Complex x(3, -2);
