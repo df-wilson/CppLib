@@ -69,15 +69,40 @@ TEST_CASE("Complex: Inquality test", "MATH")
    REQUIRE_FALSE(x != z);
 }
 
-TEST_CASE("Complex: Magnitude Test", "MATH")
+TEST_CASE("Complex: Magnitude Test", "Math")
 {
+      // Test with default complex number
+   dw::Complex x;
+   double magnitude = x.magnitude();
+   REQUIRE(magnitude == Approx(0.0).margin(0.0001));
+   
+   // Test with real portion only
+   dw::Complex y(5);
+   magnitude = y.magnitude();
+   REQUIRE(magnitude == Approx(5.0).margin(0.0001));
+   
+   // Test with imaginary portion only
+   dw::Complex z(0,5);
+   magnitude = z.magnitude();
+   REQUIRE(magnitude == Approx(5.0).margin(0.0001));
+   
+   // Test with imaginary portion only
+   dw::Complex b(5,5);
+   magnitude = b.magnitude();
+   REQUIRE(magnitude == Approx(7.07106).margin(0.0001));
+   
+   // Test negative
+   dw::Complex a(-5,-8);
+   magnitude = a.magnitude();
+   REQUIRE(magnitude == Approx(9.43398).margin(0.0001));
+   
    dw::Complex complex(-4, -3);
-   double magnitude = complex.magnitude();
+   magnitude = complex.magnitude();
    REQUIRE(magnitude == Approx(5.0).margin(0.0001));
    
    dw::Complex complex2(3, 4);
-   double magnitude2 = complex2.magnitude();
-   REQUIRE(magnitude2 == Approx(5.0).margin(0.0001));
+   magnitude = complex2.magnitude();
+   REQUIRE(magnitude == Approx(5.0).margin(0.0001));
 }
 
 TEST_CASE("Complex: Angle Test", "Math")
