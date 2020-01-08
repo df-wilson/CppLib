@@ -180,7 +180,7 @@ TEST_CASE("Complex: operator+=", "Math")
    double real = z.getR();
    double imaginary = z.getI();
    REQUIRE(real == Approx(21.0).margin(0.0001));
-   (imaginary == Approx(15.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(15.0).margin(0.0001));
    
    // Test adding an integer
    z = x;
@@ -196,6 +196,63 @@ TEST_CASE("Complex: operator+=", "Math")
    imaginary = z.getI();
    REQUIRE(real == Approx(10.0).margin(0.0001));
    REQUIRE(imaginary == Approx(10.5).margin(0.0001));
+}
+
+TEST_CASE("Complex: operator-", "Math")
+{
+   dw::Complex x(5.5, 10.5);
+   dw::Complex y(15.5, 4.5);
+   dw::Complex z;
+   
+   // Test adding 2 complex objects
+   z = x - y;
+   double real = z.getR();
+   double imaginary = z.getI();
+   REQUIRE(real == Approx(-10.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(6.0).margin(0.0001));
+   
+   // Test adding an integer
+   z = x - 4;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(1.5).margin(0.0001));
+   REQUIRE(imaginary == Approx(10.5).margin(0.0001));
+   
+   z = 4.5 - x;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(-1.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(-10.5).margin(0.0001));   
+}
+
+TEST_CASE("Complex: operator-=", "Math")
+{
+   dw::Complex x(5.5, 10.5);
+   dw::Complex y(15.5, 4.5);
+   dw::Complex z;
+   
+   // Test subtracting 2 complex objects
+   z = x;
+   z -= y;
+   double real = z.getR();
+   double imaginary = z.getI();
+   REQUIRE(real == Approx(-10.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(6.0).margin(0.0001));
+   
+   // Test subtracting an integer
+   z = x;
+   z -= 4;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(1.5).margin(.0001));
+   REQUIRE(imaginary == Approx(10.5).margin(0.0001));
+   
+   z = 4.5;
+   z -= x;
+   real = z.getR();
+   imaginary = z.getI();
+   REQUIRE(real == Approx(-1.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(-10.5).margin(0.0001));
 }
 
 TEST_CASE("Complex: operator/", "Math")
