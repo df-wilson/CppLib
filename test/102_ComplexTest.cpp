@@ -255,6 +255,31 @@ TEST_CASE("Complex: operator-=", "Math")
    REQUIRE(imaginary == Approx(-10.5).margin(0.0001));
 }
 
+TEST_CASE("Complex: operator*", "Math")
+{
+   dw::Complex x(3, 5);
+   dw::Complex y(8, -7);
+   dw::Complex z;
+   
+   z = x*y;
+   double real = z.getR();
+   double imaginary = z.getI();
+   REQUIRE(real == Approx(59.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(19.0).margin(0.0001));
+}
+
+TEST_CASE("Complex: operator*=", "Math")
+{
+   dw::Complex x(3, 5);
+   dw::Complex y(8, -7);
+   
+   x *= y;
+   double real = x.getR();
+   double imaginary = x.getI();
+   REQUIRE(real == Approx(59.0).margin(0.0001));
+   REQUIRE(imaginary == Approx(19.0).margin(0.0001));
+}
+
 TEST_CASE("Complex: operator/", "Math")
 {
    dw::Complex x(3, -2);
