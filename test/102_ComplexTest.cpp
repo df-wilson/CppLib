@@ -352,3 +352,14 @@ TEST_CASE("Complex: operator/=", "Math")
    REQUIRE(real == Approx(0.0).margin(0.00001));
    REQUIRE(imaginary == Approx(0.0).margin(0.00001));
 }
+
+TEST_CASE("Complex: negate", "Math")
+{
+   dw::Complex x(5.5, 10.5);
+   dw::Complex y = -x;
+   
+   double real = y.getR();
+   double imaginary = y.getI();
+   REQUIRE(real == Approx(-5.5).margin(0.0001));
+   REQUIRE(imaginary == Approx(-10.5).margin(0.0001));
+}
