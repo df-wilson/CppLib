@@ -8,17 +8,41 @@ TEST_CASE("Complex: Constructor test", "MATH")
    dw::Complex x;
    double real = x.getR();
    double imaginary = x.getI();
+   double magnitude = x.magnitude();
+   double angle = x.angleRad();
    
    REQUIRE(real == Approx(0.0));
    REQUIRE(imaginary == Approx(0.0));
+   REQUIRE(magnitude == Approx(0.0));
+   REQUIRE(angle == Approx(0.0));
    
    // Test construction with supplied values
    dw::Complex y(10.5, 15.0);
    real = y.getR();
    imaginary = y.getI();
+   magnitude = y.magnitude();
+   angle = y.angleRad();
    
    REQUIRE(real == Approx(10.5));
    REQUIRE(imaginary == Approx(15.0));
+   REQUIRE(magnitude == Approx(18.3098).margin(0.00001));
+   REQUIRE(angle == Approx(0.96007).margin(0.00001));
+}
+
+TEST_CASE("Complex: Copy constructor test", "MATH")
+{
+   dw::Complex x(10.5, 15.0);
+   
+   dw::Complex y(x);
+   double real = y.getR();
+   double imaginary = y.getI();
+   double magnitude = y.magnitude();
+   double angle = y.angleRad();
+   
+   REQUIRE(real == Approx(10.5));
+   REQUIRE(imaginary == Approx(15.0));
+   REQUIRE(magnitude == Approx(18.3098).margin(0.00001));
+   REQUIRE(angle == Approx(0.96007).margin(0.00001));
 }
 
 TEST_CASE("Complex: Assignment test", "MATH")
@@ -28,8 +52,13 @@ TEST_CASE("Complex: Assignment test", "MATH")
    
    double real = x.getR();
    double imaginary = x.getI();
+   double magnitude = x.magnitude();
+   double angle = x.angleRad();
+   
    REQUIRE(real == Approx(101.15));
    REQUIRE(imaginary == Approx(15.73));
+   REQUIRE(magnitude == Approx(102.3658).margin(0.0001));
+   REQUIRE(angle == Approx(0.15428).margin(0.0001));
    
    real = y.getR();
    imaginary = y.getI();
@@ -39,8 +68,13 @@ TEST_CASE("Complex: Assignment test", "MATH")
    y = x;
    real = y.getR();
    imaginary = y.getI();
+   magnitude = y.magnitude();
+   angle = y.angleRad();
+   
    REQUIRE(real == Approx(101.15));
    REQUIRE(imaginary == Approx(15.73));
+   REQUIRE(magnitude == Approx(102.3658).margin(0.0001));
+   REQUIRE(angle == Approx(0.15428).margin(0.0001));
 }
 
 TEST_CASE("Complex: Equality test", "MATH")
@@ -362,4 +396,29 @@ TEST_CASE("Complex: negate", "Math")
    double imaginary = y.getI();
    REQUIRE(real == Approx(-5.5).margin(0.0001));
    REQUIRE(imaginary == Approx(-10.5).margin(0.0001));
+}
+
+TEST_CASE("Complex: operator<<", "Math")
+{
+   dw::Complex x(5.5, 10.5);
+   std::stringstream output;
+   std::string expected = "5.5 + 10.5i";
+   output << x;
+   REQUIRE(expected == output.str());
+   
+   //Test with negative imaginary part
+   expected = "5.5 - 10.5i";
+   dw::Complex y(5.5, -10.5);
+   output.str("");
+   output << y;
+   REQUIRE(expected == output.str());
+   double imaginary = y.getI();
+   REQUIRE(imaginary == Approx(-10.5).margin(0.0001));
+   
+   // Test 0 case
+   output.str("");
+   dw::Complex z(0.0, 0.0);
+   expected = "0 + 0i";
+   output << z;
+   REQUIRE(expected == output.str());
 }

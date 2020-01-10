@@ -27,7 +27,7 @@ class Complex
 public:
    /*---------  Public Methods  ------------------*/
    
-   Complex(double r=0, double i=0) :mI(i), mR(r) {}
+   Complex(double r=0, double i=0);
    virtual ~Complex() {}
     
     Complex(const Complex& other);
@@ -103,8 +103,8 @@ private:
    
    double mI;
    double mR;
-   mutable double mMagnitude = 0.0;
-   mutable double mAngle = 0.0;
+   double mMagnitude = 0.0;
+   double mAngle = 0.0;
 };
 
 } // End namespace

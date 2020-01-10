@@ -22,6 +22,11 @@ const double PI = 3.1415927;
 
 /*----------  Public Functions  ---------------*/
    
+Complex::Complex(double r, double i) 
+{
+   set(r, i); 
+}
+
 Complex::Complex(const Complex& other)
 {
    set(other.mR, other.mI);
@@ -71,42 +76,12 @@ Complex& Complex::operator/=(const Complex& rhs)
 
 double Complex::magnitude() const
 {
-   if(mMagnitude == 0.0) {
-      mMagnitude = std::sqrt(mR*mR + mI*mI);
-   }
-   
    return mMagnitude;
 }
 
 
 double Complex::angleRad() const
 {
-   if(mAngle == 0.0) {
-      if(mR == 0.0 && mI == 0.0) {
-         // Do nothing
-      }
-      else if(mR == 0.0 && mI > 0.0) {
-         mAngle = HALF_PI;
-      }
-      else if(mR == 0.0 && mI < 0.0) {
-         mAngle = -HALF_PI;
-      }
-      else if (mR > 0.0) {
-         mAngle = std::atan(mI/mR);
-      }
-      else if(mR < 0.0 && mI >= 0.0)
-      {
-         mAngle = std::atan(mI/mR) + PI;
-      }
-      else {
-         mAngle = std::atan(mI/mR) - PI;            
-      }
-   }
-      
-   if(mAngle < 0.0) {
-      mAngle = (2.0 * PI) + mAngle;
-   }
-   
    return mAngle;
 }
 
@@ -116,6 +91,32 @@ void Complex::set(double r, double i)
 {
    mR = r;
    mI = i;
+   
+   mMagnitude = std::sqrt(mR*mR + mI*mI);
+   if(mR == 0.0 && mI == 0.0) {
+      // Do nothing
+   }
+   else if(mR == 0.0 && mI > 0.0) {
+      mAngle = HALF_PI;
+   }
+   else if(mR == 0.0 && mI < 0.0) {
+      mAngle = -HALF_PI;
+   }
+   else if (mR > 0.0) {
+      mAngle = std::atan(mI/mR);
+   }
+   else if(mR < 0.0 && mI >= 0.0)
+   {
+      mAngle = std::atan(mI/mR) + PI;
+   }
+   else {
+      mAngle = std::atan(mI/mR) - PI;            
+   }
+      
+   if(mAngle < 0.0) {
+      mAngle = (2.0 * PI) + mAngle;
+   }
+   
 }
 
 
