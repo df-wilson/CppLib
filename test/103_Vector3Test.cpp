@@ -24,7 +24,7 @@ const float TEST_2_FLOAT_Y = 2.2f;
 const float TEST_2_FLOAT_Z = 3.3f;
 const float TEST_FLOAT_DELTA = 0.001;
 
-TEST_CASE("Test Vector3 constructors" "[vector]")
+TEST_CASE("Vector3: Test Vector3 constructors", "Math")
 {
    // Test the default constructor initializes values to 0
    dw::Vector3<int> defaultIntVector;
@@ -57,7 +57,7 @@ TEST_CASE("Test Vector3 constructors" "[vector]")
    REQUIRE(assignedFloatVector.z() == Approx(TEST_2_FLOAT_Z));
 }
 
-TEST_CASE("Test Vector3 get and set", "[vector]")
+TEST_CASE("Vector3: Test Vector3 get and set", "Math")
 {
    dw::Vector3<int> intVector;
    intVector.x(TEST_INT_X);
@@ -83,7 +83,7 @@ TEST_CASE("Test Vector3 get and set", "[vector]")
    REQUIRE(intVector.z() == TEST_3_INT_Z);
 }
 
-TEST_CASE("Test Vector3 length", "[vector]")
+TEST_CASE("Vector3: Test length", "Math")
 {
    const float LENGTH_RESULT = 4.115;
    
@@ -97,7 +97,7 @@ TEST_CASE("Test Vector3 length", "[vector]")
    REQUIRE(intLength == 0);
 }
 
-TEST_CASE("Test Vector3 add", "[vector]")
+TEST_CASE("Vector3: Test add", "Math")
 {
    dw::Vector3<int> testIntVector1(TEST_INT_X, TEST_INT_Y, TEST_INT_Z);
    dw::Vector3<int> testIntVector2(TEST_2_INT_X, TEST_2_INT_Y, TEST_2_INT_Z);
@@ -107,7 +107,7 @@ TEST_CASE("Test Vector3 add", "[vector]")
    REQUIRE(result.z() == TEST_INT_Z + TEST_2_INT_Z);
 }
 
-TEST_CASE("Test Vector3 negate", "[vector]")
+TEST_CASE("Vector3: Test negate", "Math")
 {
    dw::Vector3<int> intVector(TEST_INT_X, TEST_INT_Y, TEST_INT_Z);
    dw::Vector3<int> result = -intVector;
@@ -128,7 +128,7 @@ TEST_CASE("Test Vector3 negate", "[vector]")
    REQUIRE(0 == result.z());
 }
 
-TEST_CASE("Test Vector3 subtract", "[vector]")
+TEST_CASE("Vector3: Test subtract", "Math")
 {
    dw::Vector3<int> testIntVector1(TEST_INT_X, TEST_INT_Y, TEST_INT_Z);
    dw::Vector3<int> testIntVector2(TEST_2_INT_X, TEST_2_INT_Y, TEST_2_INT_Z);
@@ -138,16 +138,18 @@ TEST_CASE("Test Vector3 subtract", "[vector]")
    REQUIRE(result.z() == TEST_INT_Z - TEST_2_INT_Z);
 }
 
-TEST_CASE("Test Vector3 scalar test", "[vector]")
+TEST_CASE("Vector3: Test scalar test", "Math")
 {
    dw::Vector3<double> vector2(1.671, -1.012, -0.318);
    
    dw::Vector3<double> vector4 = vector2 * 7.41;
-   
-   std::cout << std::endl << "Question 3: " << vector4 << std::endl;
+  
+   REQUIRE(vector4.x() == Approx(12.3821).margin(0.0001));
+   REQUIRE(vector4.y() == Approx(-7.4989).margin(0.0001));
+   REQUIRE(vector4.z() == Approx(-2.3564).margin(0.0001));
 }
 
-TEST_CASE("Test Vector3 operator<<", "[vector]")
+TEST_CASE("Vector3: Test operator<<", "Math")
 {
    dw::Vector3<int> intVector(TEST_INT_X, TEST_INT_Y, TEST_INT_Z);
    std::string contents;
@@ -156,7 +158,7 @@ TEST_CASE("Test Vector3 operator<<", "[vector]")
    REQUIRE(stream.str() == "1 2 3");
 }
 
-TEST_CASE("Test Vector3 operator==", "[vector]")
+TEST_CASE("Vector3: Test operator==", "Math")
 {
    dw::Vector3<int> vector1(1,2,3);
    dw::Vector3<int> vector2(1,2,3);
@@ -173,17 +175,23 @@ TEST_CASE("Test Vector3 operator==", "[vector]")
    REQUIRE(!(vector4 == vector6));
 }
 
-TEST_CASE("Test Vector3 unit vector")
+TEST_CASE("Vector3: Test unit vector", "Math")
 {
-    dw::Vector3<double> vector1(5.581, -2.136, 0);
-    std::cout << std::endl << "UnitVector is: " << vector1.unitVector() << std::endl;
+   dw::Vector3<double> vector1(5.581, -2.136, 0);
+   dw::Vector3<double> unitVector = vector1.unitVector();
+   REQUIRE(unitVector.x() == Approx(0.9339).margin(0.0001));
+   REQUIRE(unitVector.y() == Approx(-0.3574).margin(0.0001));
+   REQUIRE(unitVector.z() == Approx(0.0).margin(0.0001));
     
     dw::Vector3<double> vector2(1.996, 3.108, -4.554);
-    std::cout << "UnitVector is: " << vector2.unitVector() << std::endl;
+   unitVector = vector2.unitVector();
+   REQUIRE(unitVector.x() == Approx(0.3404).margin(0.0001));
+   REQUIRE(unitVector.y() == Approx(0.53).margin(0.0001));
+   REQUIRE(unitVector.z() == Approx(-0.7766).margin(0.0001));
     
 }
 
-TEST_CASE("Test Vector3 dot product", "[vector]")
+TEST_CASE("Vector3: Test dot product", "Math")
 {
    dw::Vector3<double> vector1(-5.955, -4.904, -1.874);
    dw::Vector3<double> vector2(-4.496, -8.755, 7.103);
@@ -196,7 +204,7 @@ TEST_CASE("Test Vector3 dot product", "[vector]")
    REQUIRE(result == Approx(-41.382));
 }
 
-TEST_CASE("Test Vector3 angle betwee vectors", "[vector]")
+TEST_CASE("Vector3: Test angle between vectors", "Math")
 {
    dw::Vector3<double> vector1(7.35, 0.221, 5.188);
    dw::Vector3<double> vector2(2.751, 8.259, 3.985);
@@ -209,7 +217,7 @@ TEST_CASE("Test Vector3 angle betwee vectors", "[vector]")
    REQUIRE(angleRadians == Approx(3.072));
 }
 
-TEST_CASE("Test Vector3 areOrthogonal", "[vector]")
+TEST_CASE("Vector3: Test areOrthogonal", "Math")
 {
    dw::Vector3<double> vector1(-7.579, -7.88, 0.0);
    dw::Vector3<double> vector2(22.737, 23.64, 0.0);
@@ -229,7 +237,7 @@ TEST_CASE("Test Vector3 areOrthogonal", "[vector]")
    REQUIRE(areOrthogonal(vector7, vector8) == true);
 }
 
-TEST_CASE("Test Vector3 areParallel", "[vector]")
+TEST_CASE("Vector3: Test areParallel", "Math")
 {
    dw::Vector3<double> vector1(-7.579, -7.88, 0.0);
    dw::Vector3<double> vector2(22.737, 23.64, 0.0);
@@ -249,7 +257,7 @@ TEST_CASE("Test Vector3 areParallel", "[vector]")
    REQUIRE(areParallel(vector7, vector8) == true);
 }
 
-TEST_CASE("Test Vector3 cross product", "[vector]")
+TEST_CASE("Vector3: Test cross product", "Math")
 {
    dw::Vector3<double> vector1(8.462, 7.893, -8.187);
    dw::Vector3<double> vector2(6.984, -5.975, 4.778);

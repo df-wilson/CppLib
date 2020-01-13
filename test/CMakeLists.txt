@@ -8,8 +8,8 @@ set(SOURCE_FILES
     02_LinkedListTest.cpp
     03_QueueTest.cpp
     04_StackTest.cpp
-    07_Vector3Test.cpp
     101_FractionTest.cpp
+    103_Vector3Test.cpp
     301_CStringUtilTest.cpp
 )
 
